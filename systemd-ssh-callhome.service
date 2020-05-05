@@ -1,10 +1,12 @@
+#Template SystemD service for a auto healing (reverse) SSH tunnel.
+#Edit the ports, remote user, and remote host
+
 [Unit]
 Description=SSH Callhome
 After=network-online.target
 
 [Service]
 ExecStart=/usr/bin/ssh -T -N -o ServerAliveInterval=30 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -R <00:localhost:00> <user@host.com> -o IdentityFile=</root/ssh.key>
-User=<USER>
 ExecStop=/bin/kill -HUP $MAINPID
 ExecReload=/bin/kill -HUP $MAINPID
 Restart=on-failure
