@@ -1,12 +1,14 @@
 #Template SystemD service for a auto healing (reverse) SSH tunnel.
 #Edit the ports, remote user+host, and the key file.
+#In the authorized_keys file on the other system, use something like this:
+#<restrict,command="echo 'No Commands Allowed.'",port-forwarding,permitopen="localhost:22",permitlisten="localhost:5000">
 
 [Unit]
 Description=SSH Callhome
 After=network-online.target
 
 [Service]
-ExecStart=/usr/bin/ssh -T -N -o ServerAliveInterval=30 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -R <00:localhost:00> <user@host.com> -o IdentityFile=</root/ssh.key>
+ExecStart=/usr/bin/ssh -T -N -o ServerAliveInterval=30 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -R <5000:localhost:22> <user@host.com> -o IdentityFile=</root/ssh.key>
 ExecStop=/bin/kill -HUP $MAINPID
 ExecReload=/bin/kill -HUP $MAINPID
 Restart=on-failure
