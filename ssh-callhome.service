@@ -1,5 +1,5 @@
 #Template SystemD service for a auto healing (reverse) SSH tunnel.
-#Edit the ports, remote user, and remote host
+#Edit the ports, remote user+host, and the key file.
 
 [Unit]
 Description=SSH Callhome
