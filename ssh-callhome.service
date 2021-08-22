@@ -1,4 +1,4 @@
-#Template SystemD service for a auto healing (reverse) SSH tunnel.
+#Template systemd service for a auto healing (reverse) SSH tunnel.
 #/etc/systemd/system/ssh-callhome.service
 #Edit the ports, remote user+host, and the key file.
 #In the authorized_keys file on the other system, use something like this:
